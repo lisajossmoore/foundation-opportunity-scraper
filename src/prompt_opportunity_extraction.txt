@@ -1,0 +1,41 @@
+You are extracting grant/funding opportunity information from a foundation webpage or PDF text.
+
+Return ONLY valid JSON with this exact top-level structure:
+
+{
+  "is_funding_related": true/false,
+  "opportunities": [
+    {
+      "opportunity_name": "...",
+      "opportunity_url": "... or empty string",
+      "opportunity_type": "research|education|QI|fellowship|travel|other|unclear",
+      "eligibility_us": "yes|no|unclear",
+      "eligibility_text": "... short excerpt or summary ...",
+      "deadline_text": "... short excerpt or summary ...",
+      "award_amount_text": "... short excerpt or summary ...",
+      "keywords_phrases": ["...", "...", "..."],
+      "summary_1_2_sentences": "...",
+      "evidence_snippets": ["...", "..."],
+      "confidence": "low|med|high"
+    }
+  ]
+}
+
+Rules:
+- If the page is not about funding opportunities, set is_funding_related=false and return an empty opportunities list.
+- Many pages may describe multiple distinct opportunities; create one object per opportunity.
+- Do NOT invent deadlines or dollar amounts. If missing, use empty string.
+- eligibility_us should be:
+  - "yes" if clearly open to US applicants or no geographic restrictions mentioned,
+  - "no" if restricted to a different country/state/region that excludes Utah,
+  - "unclear" if you cannot tell.
+- keywords_phrases should include topic areas, target populations, methods, and career stage phrases (e.g., "early career", "pilot funding", "implementation science", disease/condition names).
+- evidence_snippets must be short direct quotes from the text (max ~25 words each).
+
+Input metadata:
+Foundation: <<foundation_name>> (<<foundation_id>>)
+Source URL: <<source_url>>
+
+Page text:
+<<text>>
+

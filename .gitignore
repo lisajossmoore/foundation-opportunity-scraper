@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# Data outputs (generated)
+*.csv
+*.xlsx
+
+# Large intermediate files
+data/output/
+
+# OS junk
+.DS_Store
+Thumbs.db
