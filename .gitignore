@@ -13,9 +13,12 @@ venv/
 *.csv
 *.xlsx
 
+
 # Large intermediate files
 data/output/
 
 # OS junk
 .DS_Store
 Thumbs.db
+data/
+page_store/
